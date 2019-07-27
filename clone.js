@@ -118,15 +118,16 @@ async function cloneQuestion(api, params) {
   console.log("Cloning question ID " + params.id);
   try {
     var question = await api.getQuestion(params.id);
+    // console.log('oldQuestion', JSON.stringify(question));
     var sourceFields = await api.getFields(question.database_id);
     var targetFields = await api.getFields(params.targetDB);
 
     var newQuestion = questionPropertiesTo(question, sourceFields, targetFields, 
       params.targetDB, params.targetCollection);
-    // console.log(newQuestion)
+    // console.log('newQuestion', newQuestion)
     var result = api.postQuestion(newQuestion);
   } catch(e) {
-    console.error(e);
+    console.error("Error cloning question ID " + params.id, e);
   }
 }
 
@@ -193,8 +194,8 @@ function questionPropertiesTo(original, source_fields, target_fields,
 
   var dataset_query = merge(original.dataset_query, {database: database_id});
   if (dataset_query.type === 'native') {
-    dataset_query.native.template_tags = toTargetTemplateTags(
-      dataset_query.native.template_tags, source_fields, target_fields);
+    dataset_query.native['template-tags'] = toTargetTemplateTags(
+      dataset_query.native['template-tags'], source_fields, target_fields);
   }
   return {
     name: original.name,
