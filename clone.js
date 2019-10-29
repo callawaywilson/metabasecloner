@@ -57,10 +57,12 @@ if (!sessionId) {
     console.log("Connecting to '" + host + "'");
 
     if (sessionId) {
-      doClone(api, {type: type, id: id, targetDB: targetDB});
+      doClone(api, {type: type, id: id, targetDB: targetDB, 
+        targetCollection: targetCollection});
     } else {
       api.login().then(function() {
-        doClone(api, {type: type, id: id, targetDB: targetDB});
+        doClone(api, {type: type, id: id, targetDB: targetDB, 
+          targetCollection: targetCollection});
       }).catch(console.error);
     }
   });
