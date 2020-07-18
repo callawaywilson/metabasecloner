@@ -14,12 +14,12 @@ $ node clone.js <options>
 
 Note: To clone a dashboard, questions in the source dashboard must exist in the new collection with the same name.
 
-Clone Collection
-clone -h host -u user -t type(question|collection|dashboard) -i SourceID -c TargetCollectionID -d TargetDatabaseID
-
-Clone Dashboard
-clone -h host -s session -t dashboard -i SourceID -d TargetDBID -c TargetCollectionID
-
+```bash
+# Clone Collection
+node clone.js clone -h host -u user -t type(question|collection|dashboard) -i SourceID -c TargetCollectionID -d TargetDatabaseID
+# Clone Dashboard
+node clone.js clone -h host -s session -t dashboard -i SourceID -d TargetDBID -c TargetCollectionID
+```
 
 ## Dashboard cloning instructions:
 
